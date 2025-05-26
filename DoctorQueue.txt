@@ -1,0 +1,41 @@
+How to separate doctor's priority queue with normal queue.
+
+Approach 1: using interface
+
+
+Approach 2: Using hashmaps of doctor queues
+
+
+
+Appoingment Manager{
+
+	DoctorList;
+
+	Hashmap<DocotorName, Queue<Patient>>
+
+	a[5] = 
+
+
+	public bookAppointment(Patient pName, ){
+
+
+	}
+
+	public String assignDoctor{
+		
+	}
+	
+}
+
+
+EmergencyManager{
+
+	Hashmap<DoctorName, PriorityQueue<>>
+	Emergency emergency;
+	
+
+}
+
+
+
+

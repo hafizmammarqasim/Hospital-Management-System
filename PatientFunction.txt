@@ -1,0 +1,16 @@
+PatientManager{
+   Patient = searchPatient(idcardNumber); 
+
+   case 1:
+	bookAppointment(Patient);
+
+   case 2:
+	Patient.getMedicalRecord.getTail();
+
+   case 3: 
+	Patient.getMedicalRecord.printMedicalHistory();
+
+   case 4: 
+	Patient.viewProfile();
+
+}
