@@ -1,4 +1,4 @@
-public class Person {
+public class Person{
     public String personId;
     public String name;
     public String age;
@@ -6,5 +6,6 @@ public class Person {
     public String contactNum;
     public String userName;
     public String password;
+
 
 }

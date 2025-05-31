@@ -5,7 +5,7 @@ public class Main {
 
         Hospital hospital = new Hospital();
 
-        hospital.adminManager.askPassword();
+        hospital.adminManager.adminMenu();
     }
 
 }

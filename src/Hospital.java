@@ -5,12 +5,16 @@ public class Hospital {
     AdminManager adminManager;
     PatientTree patientTree;
 
-
+    private static final Hospital INSTANCE = new  Hospital();
 
     public Hospital(){
-        this.adminManager = new AdminManager();
         patientTree = new PatientTree();
+        this.adminManager = new AdminManager(this.patientTree);
         adminManager.addAdmin();
+    }
+
+    public static Hospital getInstance(){
+        return INSTANCE;
     }
 
 }
