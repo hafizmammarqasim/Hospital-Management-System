@@ -43,9 +43,10 @@ public class AdminManager {
         System.out.println("\t==============================");
 
         System.out.println("1. Register Doctor");
-        System.out.println("2. Register Patient");
+        System.out.println("2. Patient Functions");
+        System.out.println("3. Have Checkup");
         System.out.println("4. View Patients");
-        System.out.println("5. Checkup ");
+        System.out.println("5. Exit ");
 
         int choice = myInput.nextInt();
         myInput.nextLine();
@@ -54,7 +55,7 @@ public class AdminManager {
                     addDoctor();
                     break;
                 case 2:
-                    addPatient();
+                    patientFunctions();
                     break;
                 case 3:
                     haveCheckup();
@@ -68,6 +69,39 @@ public class AdminManager {
         }
 
 
+    }
+
+    public void patientFunctions(){
+        while (true){
+        System.out.println("\t===== Patient Functions =====");
+        System.out.println("1. Add Patients");
+        System.out.println("2. Search Patient");
+        System.out.println("3. View Patients");
+        System.out.println("4. Delete Patient");
+        System.out.println("5. Exit");
+
+        int choice = myInput.nextInt();
+        myInput.nextLine();
+        switch (choice) {
+            case 1:
+                addPatient();
+                break;
+            case 2:
+                searchPatient();
+                break;
+            case 3:
+                viewPatients();
+                break;
+            case 4:
+                deletePatient();
+                break;
+            case 5:
+                return;
+            default:
+                System.out.println("Invalid choice");
+        }
+
+        }
     }
 
     public void addPatient(){
@@ -101,4 +135,10 @@ public class AdminManager {
         patientTree.viewPatients();
     }
 
+    public void deletePatient(){
+        System.out.println("Enter the patient's id Card Number: ");
+        String idCardNum = myInput.nextLine();
+
+        patientTree.deletePatients(idCardNum);
+    }
 }
