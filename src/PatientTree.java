@@ -43,7 +43,6 @@ public class PatientTree {
 
     public void viewPatients(){
         viewPatients(root);
-        viewInfix(root);
     }
 
     private void viewInfix(PatientTreeNode patient){
@@ -61,7 +60,6 @@ public class PatientTree {
 
         viewPatients(patient.left);
         System.out.println(patient.pData.toString());
-        System.out.println(patient.height);
         viewPatients(patient.right);
     }
 
@@ -86,7 +84,6 @@ public class PatientTree {
         if(node == null){
             return null;
         }
-        System.out.println(node.pData.toString());
         String tempId = node.pData.cnicNum;
         if(idNumber.compareTo(tempId) < 0){
             node.left = deletePatient(node.left,idNumber);
@@ -101,7 +98,6 @@ public class PatientTree {
 
     //deletePatientLogic
     private PatientTreeNode delete(PatientTreeNode node){
-        System.out.println("Entered delete 2");
         //if patient Node has no child node
         if(height(node.left) == -1 && height(node.right) == -1)
             return null;
