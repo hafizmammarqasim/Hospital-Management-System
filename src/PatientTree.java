@@ -12,7 +12,7 @@ public class PatientTree {
     //Patient would be inserted in the tree
     private PatientTreeNode addPatient(PatientTreeNode patientNode,Patient patient ){
         if(patientNode == null){
-            //----Mistake:  returned patientNode directly rather than saving it to root
+            //----Mistake:  returned new PatientTreeNode(patient) Node directly rather than saving it to patientNode
             patientNode = new PatientTreeNode(patient);
         }
         else {
