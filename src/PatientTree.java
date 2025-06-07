@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 public class PatientTree {
     PatientTreeNode root;
 
@@ -10,22 +12,30 @@ public class PatientTree {
     //Patient would be inserted in the tree
     private PatientTreeNode addPatient(PatientTreeNode patientNode,Patient patient ){
         if(patientNode == null){
-            return new PatientTreeNode(patient);
+            //----Mistake:  returned patientNode directly rather than saving it to root
+            patientNode = new PatientTreeNode(patient);
         }
-        else{
+        else {
             //String class has its own built-in compareTo function
             //so it compares the string character by character based on UNI code
             //And we do not need comparable
+
+            //length of CNIC Numbers must be same, otherwise tree would be compromised
             int result = patient.cnicNum.compareTo(patientNode.pData.cnicNum);
-            if(result < 0){
+//
+//            BigInteger num1 = new BigInteger(patient.cnicNum);
+//            BigInteger num2 = new BigInteger(patientNode.pData.cnicNum);
+//            int result = num1.compareTo(num2);
+            System.out.println("Patient comparison with previous node: "+result);
+            if (result < 0) {
                 patientNode.left = addPatient(patientNode.left, patient);
-            } else if(result > 0){
+            } else if (result > 0) {
                 patientNode.right = addPatient(patientNode.right, patient);
             }
-        }
 
+        }
         //calculating or updating height at every node
-        patientNode.height = Math.max(height(patientNode.left), height(patientNode.right))+1;
+        patientNode.height = Math.max(height(patientNode.left), height(patientNode.right)) + 1;
         return rotate(patientNode);
     }
 
@@ -33,6 +43,16 @@ public class PatientTree {
 
     public void viewPatients(){
         viewPatients(root);
+        viewInfix(root);
+    }
+
+    private void viewInfix(PatientTreeNode patient){
+        if (patient == null)
+            return;
+
+        System.out.println(patient.pData.toString());
+        viewInfix(patient.left);
+        viewInfix(patient.right);
     }
 
     public void viewPatients(PatientTreeNode patient){
@@ -41,6 +61,7 @@ public class PatientTree {
 
         viewPatients(patient.left);
         System.out.println(patient.pData.toString());
+        System.out.println(patient.height);
         viewPatients(patient.right);
     }
 
@@ -67,12 +88,12 @@ public class PatientTree {
         }
         System.out.println(node.pData.toString());
         String tempId = node.pData.cnicNum;
-        if(tempId.compareTo(idNumber) < 1){
+        if(idNumber.compareTo(tempId) < 0){
             node.left = deletePatient(node.left,idNumber);
-        } else if(tempId.compareTo(idNumber)>1){
+        } else if(idNumber.compareTo(tempId) > 0){
             node.right = deletePatient(node.right,idNumber);
         } else {
-            node = delete(root);
+            node = delete(node);
         }
 
         return node;
@@ -89,11 +110,12 @@ public class PatientTree {
             return node.left;
         //if patient node has just right child
         else{
-            PatientTreeNode tempNode = findMin(node);
+
+            //----Mistake: passed node instead of node.right
+            PatientTreeNode tempNode = findMin(node.right);
             node.pData = tempNode.pData;
             node.right = deletePatient(node.right, node.pData.cnicNum);
             System.out.println(node.pData.toString());
-            System.out.println(node.pData.name +"  deleted");
             return node;
         }
     }
@@ -115,24 +137,26 @@ public class PatientTree {
     //=================================================
     //         Rotation function to make tree AVL
     private PatientTreeNode rotate(PatientTreeNode node){
+
         if(height(node.left)-height(node.right)>1){
             //left-left case
-            if(height(node.left.left)-height(node.left.right)>1){
+            //-----Mistake: let difference of children > 1 / -1 instead of > or < 0
+            if(height(node.left.left)-height(node.left.right)>0){
                 node = rightRotate(node);
             }
             //left-right case
-            else if(height(node.left.left)-height(node.left.right)<-1){
+            else if(height(node.left.left)-height(node.left.right)<0){
                 node.left = leftRotate(node.left);
                 node = rightRotate(node);
             }
         }
         else if(height(node.left) - height(node.right)<-1){
             //right-right case
-            if(height(node.right.left)-height(node.right.right)<-1){
-                node = rightRotate(node);
+            if(height(node.right.left)-height(node.right.right)<0){
+                node = leftRotate(node);
             }
             //right-left case
-            else if(height(node.right.left)-height(node.right.right)>1){
+            else if(height(node.right.left)-height(node.right.right)>0){
                 node.right = rightRotate(node.right);
                 node = leftRotate(node);
             }
@@ -143,6 +167,7 @@ public class PatientTree {
     private PatientTreeNode rightRotate(PatientTreeNode node){
         PatientTreeNode tempNode = node;
         node = node.left;
+
         tempNode.left = node.right;
         node.right = tempNode;
 
