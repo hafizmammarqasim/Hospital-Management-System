@@ -187,4 +187,32 @@ public class PatientTree {
 
     //===========================================
 
+    public void searchPatient(String idCardNum){
+        PatientTreeNode patient;
+        patient = searchPatient(root, idCardNum);
+
+        if (patient!= null){
+            System.out.println(patient.pData.toString());
+        }else {
+            System.out.println("No such patient exist");
+        }
+    }
+
+    private PatientTreeNode searchPatient(PatientTreeNode patient, String idCardNum){
+        if(patient == null){
+            System.out.println("No Patient in the data base");
+            return null;
+        }
+
+        int result = idCardNum.compareTo(patient.pData.cnicNum);
+
+        if(result<0){
+            return searchPatient(patient.left,idCardNum);
+        } else if(result>0){
+            return searchPatient(patient.right, idCardNum);
+        }else{
+            return patient;
+        }
+    }
+
 }

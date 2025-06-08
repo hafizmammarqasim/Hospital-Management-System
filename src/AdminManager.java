@@ -128,7 +128,9 @@ public class AdminManager {
     }
 
     public void searchPatient(){
-
+        System.out.println("Enter patient's id card number: ");
+        String idCardNum = myInput.nextLine();
+        patientTree.searchPatient(idCardNum);
     }
 
     public void viewPatients(){
