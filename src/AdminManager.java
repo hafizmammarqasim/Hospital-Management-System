@@ -1,11 +1,16 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AdminManager {
     AdminList adminList;
     PatientTree patientTree;
+    DoctorManager doctorManager;
+    HashMap<String, Doctor> doctorList;
 
-    public AdminManager(PatientTree patient){
-        this.patientTree = patient;
+    public AdminManager(Hospital hospital){
+        this.patientTree = hospital.patientTree;
+        this.doctorList = hospital.doctorList;
+        this.doctorManager = hospital.doctorManager;
         this.adminList = new AdminList();
     }
     Scanner myInput = new Scanner(System.in);
@@ -120,7 +125,7 @@ public class AdminManager {
     }
 
     public void addDoctor(){
-
+        doctorManager.addDoctor();
     }
 
     public void haveCheckup(){
@@ -143,4 +148,6 @@ public class AdminManager {
 
         patientTree.deletePatients(idCardNum);
     }
+
+
 }
