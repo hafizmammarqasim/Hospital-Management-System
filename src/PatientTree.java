@@ -9,6 +9,8 @@ public class PatientTree {
     public void addPatient(Patient patient){
        root = addPatient(root, patient);
     }
+
+
     //Patient would be inserted in the tree
     private PatientTreeNode addPatient(PatientTreeNode patientNode,Patient patient ){
         if(patientNode == null){

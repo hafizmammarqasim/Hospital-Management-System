@@ -1,15 +1,18 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Department {
-    private String name;
-    private String depId;
-
+    protected String name;
+    protected String depId;
+    protected HashMap<String, Doctor> doctorList;
 //    LinkedList<Bed> emptyBeds = new LinkedList<>();
     ArrayList<Bed> emptyBeds = new ArrayList<>();
     ArrayList<Bed> occupiedBeds = new ArrayList<>();
 
-    public Department(){
+    public Department(String name, String depId){
+        this.name = name;
+        this.depId = depId;
         addBeds();
     }
     public void addBeds(){
