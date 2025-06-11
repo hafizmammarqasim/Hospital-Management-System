@@ -3,6 +3,7 @@ import java.util.List;
 
 public class MedicalRecord {
     private String recordId;
+    private String initialDiagnosis;
     private String diagnosis;
     private String severity;
     private boolean admitStatus;
@@ -21,4 +22,9 @@ public class MedicalRecord {
         this.medications = medications;
         this.checkUpDate = checkUpDate;
     }
+
+    public MedicalRecord(String medicalDiagnosis){
+        this.initialDiagnosis = medicalDiagnosis;
+    }
+
 }

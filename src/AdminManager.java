@@ -12,6 +12,7 @@ public class AdminManager {
         this.doctorList = hospital.doctorList;
         this.doctorManager = hospital.doctorManager;
         this.adminList = new AdminList();
+        addAdmin();
     }
     Scanner myInput = new Scanner(System.in);
 
@@ -111,9 +112,11 @@ public class AdminManager {
 
     public void addPatient(){
         Patient tempPatient = new Patient();
+
         System.out.println("\n\t-------Add Patient------");
         System.out.println("Enter patient Name:");
         tempPatient.name = myInput.nextLine();
+
         System.out.println("Enter ID card #: ");
         tempPatient.cnicNum = myInput.nextLine();
 
@@ -125,7 +128,7 @@ public class AdminManager {
     }
 
     public void addDoctor(){
-        doctorManager.addDoctor();
+     //   doctorManager.addDoctor();
     }
 
     public void haveCheckup(){

@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 public class Hospital {
     private String hName;
-    Department department;
+    HashMap<String, Department> departmentList;
     AdminManager adminManager;
     DoctorManager doctorManager;
     PatientTree patientTree;

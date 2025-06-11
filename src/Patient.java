@@ -1,9 +1,10 @@
 public class Patient extends Person {
+    public String patientId;
     String bloodType;
     private MedicalRecordList medicalRecord;
 
-    public void addMedicalRecord(){
-
+    public void addMedicalRecord(String reason){
+        medicalRecord.addMedicalRecord();
     }
 
 //    public int compareTo(Patient p){
@@ -19,4 +20,5 @@ public class Patient extends Person {
                 ", bloodType='" + bloodType + '\'' +
                 '}';
     }
+
 }
