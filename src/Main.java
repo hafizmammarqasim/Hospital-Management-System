@@ -6,6 +6,7 @@ public class Main {
         Hospital hospital = new Hospital();
 
         hospital.adminManager.adminMenu();
+
     }
 
 }

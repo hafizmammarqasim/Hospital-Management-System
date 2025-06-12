@@ -13,6 +13,7 @@ public class Department {
     public Department(String name, String depId){
         this.name = name;
         this.depId = depId;
+        this.doctorList = new HashMap<>();
         addBeds();
     }
     public void addBeds(){

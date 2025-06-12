@@ -6,11 +6,13 @@ public class AdminManager {
     PatientTree patientTree;
     DoctorManager doctorManager;
     HashMap<String, Doctor> doctorList;
+    DepartmentManager departmentManager;
 
     public AdminManager(Hospital hospital){
         this.patientTree = hospital.patientTree;
         this.doctorList = hospital.doctorList;
         this.doctorManager = hospital.doctorManager;
+        this.departmentManager = hospital.departmentManager;
         this.adminList = new AdminList();
         addAdmin();
     }
@@ -58,7 +60,7 @@ public class AdminManager {
         myInput.nextLine();
             switch (choice){
                 case 1:
-                    addDoctor();
+                    doctorFunctions();
                     break;
                 case 2:
                     patientFunctions();
@@ -127,9 +129,66 @@ public class AdminManager {
 
     }
 
-    public void addDoctor(){
-     //   doctorManager.addDoctor();
+    public void doctorFunctions(){
+        System.out.println("Enter Department Name: ");
+        String depName = myInput.nextLine();
+
+
+        while (true) {
+            System.out.println("==== DOCTOR FUNCTIONS ====");
+            System.out.println("Choose Function you want to perform: ");
+            System.out.println("1. Add Doctor");
+            System.out.println("2. Delete Doctor");
+            System.out.println("3. View Department Doctors: ");
+            System.out.println("0. Exit");
+            char choice = myInput.next().charAt(0);
+
+            switch (choice){
+                case '1':
+                    departmentManager.addDoctor(IdGenerator.generateDoctorId(), depName);
+                    break;
+                case '2':
+                    departmentManager.deleteDoctor(depName);
+                    break;
+                case '3':
+                    departmentManager.viewDepartmentDoctors(depName);
+                    break;
+                case '0':
+                    return;
+            }
+        }
     }
+
+//    public void Doctor(){
+//        System.out.println("Enter Department Name: ");
+//        String depName = myInput.nextLine();
+//
+//
+//        while (true) {
+//            System.out.println("==== DOCTOR FUNCTIONS ====");
+//            System.out.println("Choose Function you want to perform: ");
+//            System.out.println("1. Add Doctor");
+//            System.out.println("2. Delete Doctor");
+//            System.out.println("3. View Department Doctors: ");
+//            System.out.println("0. Exit");
+//            char choice = myInput.next().charAt(0);
+//
+//            switch (choice){
+//                case '1':
+//                    departmentManager.addDoctor(IdGenerator.generateDoctorId(), depName);
+//                    break;
+//                case '2':
+//                    departmentManager.deleteDoctor(depName);
+//                    break;
+//                case '3':
+//                    departmentManager.viewDepartmentDoctors(depName);
+//                    break;
+//                case '0':
+//                    return;
+//            }
+//        }
+//    }
+
 
     public void haveCheckup(){
 

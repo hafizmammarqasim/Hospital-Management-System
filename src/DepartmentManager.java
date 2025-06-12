@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 public class DepartmentManager {
     // dkh lou department kay functions kam hain, ham is class k baghair
@@ -18,7 +19,9 @@ public class DepartmentManager {
         departmentList.put("Urology",new Department("Urology","005"));
     }
 
-    public void addDoctor(String doctorId){
+    public void addDoctor(String doctorId, String depName){
+        Department department = departmentList.get(depName);
+
         Doctor tempDoctor = new Doctor();
         tempDoctor.doctorId = doctorId;
 
@@ -28,16 +31,26 @@ public class DepartmentManager {
         System.out.println("Enter id Card Number: ");
         tempDoctor.cnicNum = myInput.nextLine();
 
-        System.out.println("Enter department: ");
-        String department = myInput.nextLine();
-
 
         //we are keeping doctor id as key in doctor hashmap
-        departmentList.get(department).doctorList.put(doctorId,tempDoctor);
+        department.doctorList.put(doctorId,tempDoctor);
 
     }
 
-    public void deleteDoctor(){
-        
+    public void deleteDoctor(String depName){
+        System.out.println("==== Delete Doctor ====");
+
+        System.out.println("Enter the doctor Id");
+        String id = myInput.nextLine();
+
+        departmentList.get(depName).doctorList.remove(id);
+
+    }
+
+    public void viewDepartmentDoctors(String depName){
+
+        for (Map.Entry<String, Doctor> doctor : departmentList.get(depName).doctorList.entrySet()){
+            System.out.println(doctor.getValue());
+        }
     }
 }

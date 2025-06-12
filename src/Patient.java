@@ -2,7 +2,6 @@ public class Patient extends Person {
     public String patientId;
     String bloodType;
     private MedicalRecordList medicalRecord;
-
     public void addMedicalRecord(String reason){
         medicalRecord.addMedicalRecord();
     }
