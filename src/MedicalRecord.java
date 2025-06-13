@@ -2,7 +2,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MedicalRecord {
-    private String recordId;
+    public String recordId;
     private String initialDiagnosis;
     private String diagnosis;
     private String severity;
@@ -27,4 +27,16 @@ public class MedicalRecord {
         this.initialDiagnosis = medicalDiagnosis;
     }
 
+    @Override
+    public String toString() {
+        return "MedicalRecord{" +
+                "recordId='" + recordId + '\'' +
+                ", initialDiagnosis='" + initialDiagnosis + '\'' +
+                ", diagnosis='" + diagnosis + '\'' +
+                ", severity='" + severity + '\'' +
+                ", doctor=" + doctor.name +
+                ", medications=" + medications +
+                ", checkUpDate=" + checkUpDate +
+                '}';
+    }
 }

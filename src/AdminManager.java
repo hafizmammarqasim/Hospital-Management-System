@@ -53,7 +53,6 @@ public class AdminManager {
         System.out.println("1. Register Doctor");
         System.out.println("2. Patient Functions");
         System.out.println("3. Have Checkup");
-        System.out.println("4. View Patients");
         System.out.println("5. Exit ");
 
         int choice = myInput.nextInt();
@@ -67,9 +66,6 @@ public class AdminManager {
                     break;
                 case 3:
                     haveCheckup();
-                    break;
-                case 4:
-                    viewPatients();
                     break;
                 case 5:
                     return;

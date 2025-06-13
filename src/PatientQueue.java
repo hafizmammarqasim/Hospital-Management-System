@@ -19,12 +19,24 @@ public class PatientQueue {
     }
 
     public Patient dequeuePatient(){
-        if (front == -1 && rear == -1 ){
+        if (front == rear ){
             System.out.println("You do not have any patients waiting");
             return null;
         }
 
         return queue[++front];
+    }
+
+    public void viewPatients(){
+        if(front == rear){
+            System.out.println("You do not have any patients waiting");
+            return;
+        }
+
+        for (int i=front+1; i<=rear; i++){
+            System.out.println("Patient Name: "+queue[i].name +"   Patient ID: "+ queue[i].patientId);
+        }
+
     }
 
 }

@@ -14,7 +14,7 @@ public class Hospital {
         patientTree = new PatientTree();
         this.departmentList = new HashMap<>();
         this.doctorList = new HashMap<>();
-        this.doctorManager = new DoctorManager(this);
+//        this.doctorManager = new DoctorManager(this);
         this.departmentManager = new DepartmentManager(this);
         this.adminManager = new AdminManager(this);
         adminManager.addAdmin();

@@ -22,7 +22,7 @@ public class DepartmentManager {
     public void addDoctor(String doctorId, String depName){
         Department department = departmentList.get(depName);
 
-        Doctor tempDoctor = new Doctor();
+        Doctor tempDoctor = new Doctor(department);
         tempDoctor.doctorId = doctorId;
 
         System.out.println("Enter the doctor Name: ");

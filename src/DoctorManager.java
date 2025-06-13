@@ -2,14 +2,21 @@ import java.util.HashMap;
 import java.util.Scanner;
 public class DoctorManager {
 
-    Hospital hospital;
+   Doctor doctor;
+   PatientQueue q;
     static String id;
-    HashMap<String, Doctor> doctorList;
     Scanner myInput = new Scanner(System.in);
 
-    public DoctorManager (Hospital hospital){
-        this.hospital = hospital;
+    public DoctorManager (Doctor doctor){
+        this.doctor = doctor;
+        this.q = doctor.patientQueue;
     }
+
+//    public void checkPatient(){
+//        Patient patient = q.dequeuePatient();
+//
+//       // patient.addMedicalRecord();
+//    }
 
     
 
