@@ -15,7 +15,6 @@ public class PatientQueue {
                     //so we can check which doctor has less patients
 
         System.out.println("Your appointment is booked at Doctor :"+ patient.name);
-
     }
 
     public Patient dequeuePatient(){
@@ -24,6 +23,7 @@ public class PatientQueue {
             return null;
         }
 
+        size--;
         return queue[++front];
     }
 
