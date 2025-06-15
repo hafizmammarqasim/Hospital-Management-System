@@ -1,12 +1,14 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Department {
     protected String name;
     protected String depId;
     protected HashMap<String, Doctor> doctorList;
-//    LinkedList<Bed> emptyBeds = new LinkedList<>();
+    DoctorManager doctorManager = new DoctorManager(this);
     ArrayList<Bed> emptyBeds = new ArrayList<>();
     ArrayList<Bed> occupiedBeds = new ArrayList<>();
 

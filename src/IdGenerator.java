@@ -7,7 +7,8 @@ public class IdGenerator {
         return String.format("%03d",doctorCounter++);
     }
 
-    public static String getPatientId(){
+    public static String generatePatientId(){
         return String.format("%03d",patientCounter++);
     }
+
 }

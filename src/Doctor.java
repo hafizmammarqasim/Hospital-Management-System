@@ -1,7 +1,6 @@
 public class Doctor extends Person{
     public String doctorId;
     public PatientQueue patientQueue = new PatientQueue();
-    DoctorManager doctorManager = new DoctorManager(this);
     Department dep;
 
     public Doctor(Department dep){
@@ -9,11 +8,19 @@ public class Doctor extends Person{
     }
 
     public void checkNextPatient(){
+
+        //Get patient object from queue
         Patient patient = patientQueue.dequeuePatient();
 
+        patient.addMedicalRecord(this);
     }
 
-    public void viewTodayPatient(){
+    public String getName(){
+        return this.name;
+    }
+
+    public void viewTodayPatients(){
+
         patientQueue.viewPatients();
     }
 
