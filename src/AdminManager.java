@@ -82,7 +82,7 @@ public class AdminManager {
         System.out.println("2. Search Patient");
         System.out.println("3. View Patients");
         System.out.println("4. Delete Patient");
-        System.out.println("5. Exit");
+        System.out.println("0. Back");
 
         int choice = myInput.nextInt();
         myInput.nextLine();
@@ -129,29 +129,32 @@ public class AdminManager {
         System.out.println("Enter Department Name: ");
         String depName = myInput.nextLine();
 
+        if(departmentManager.departmentList.get(depName)!=null) {
+            while (true) {
+                System.out.println("======= DOCTOR FUNCTIONS ======");
+                System.out.println("Please select and option: ");
+                System.out.println("[1] Add Doctor");
+                System.out.println("[2] Delete Doctor");
+                System.out.println("[3] View Department Doctors: ");
+                System.out.println("[0] Exit");
+                char choice = myInput.next().charAt(0);
 
-        while (true) {
-            System.out.println("==== DOCTOR FUNCTIONS ====");
-            System.out.println("Choose Function you want to perform: ");
-            System.out.println("1. Add Doctor");
-            System.out.println("2. Delete Doctor");
-            System.out.println("3. View Department Doctors: ");
-            System.out.println("0. Exit");
-            char choice = myInput.next().charAt(0);
-
-            switch (choice){
-                case '1':
-                    departmentManager.addDoctor(IdGenerator.generateDoctorId(), depName);
-                    break;
-                case '2':
-                    departmentManager.deleteDoctor(depName);
-                    break;
-                case '3':
-                    departmentManager.viewDepartmentDoctors(depName);
-                    break;
-                case '0':
-                    return;
+                switch (choice) {
+                    case '1':
+                        departmentManager.addDoctor(IdGenerator.generateDoctorId(), depName);
+                        break;
+                    case '2':
+                        departmentManager.deleteDoctor(depName);
+                        break;
+                    case '3':
+                        departmentManager.viewDepartmentDoctors(depName);
+                        break;
+                    case '0':
+                        return;
+                }
             }
+        } else {
+            System.out.println("Department Doesn't exist");
         }
     }
 
