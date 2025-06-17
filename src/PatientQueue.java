@@ -39,4 +39,7 @@ public class PatientQueue {
 
     }
 
+    public int size() {
+        return size;
+    }
 }

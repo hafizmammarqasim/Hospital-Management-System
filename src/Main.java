@@ -15,10 +15,10 @@ while (true) {
     System.out.println();
     System.out.println();
     System.out.println("Please Select an Option:");
-    System.out.println("[1] Admin");
-    System.out.println("[2] Doctor");
-    System.out.println("[3] Patient");
-    System.out.println("[4] Emergency");
+    System.out.println("[1] Admin Portal");
+    System.out.println("[2] Doctor Portal");
+    System.out.println("[3] Patient Portal");
+    System.out.println("[4] Emergency Portal");
     System.out.println("[0] Exit");
     System.out.println();
 
@@ -33,11 +33,15 @@ while (true) {
         case "2":
             hospital.departmentManager.doctorLogin();
             break;
+        case "3":
+            hospital.patientManager.patientPortal();
+        case "4":
+            break;
         case "0":
             return;
 
         default:
-            System.out.println("Invalid credentials");
+            System.out.println("🚫Invalid credentials");
     }
 }
 

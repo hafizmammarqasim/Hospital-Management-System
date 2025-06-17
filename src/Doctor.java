@@ -1,8 +1,7 @@
-<<<<<<< HEAD
-import javax.print.Doc;
+import java.util.Map;
 import java.util.Scanner;
 
-public class Doctor extends Person{
+public class Doctor{
     public String doctorId;
     public String name;
     public String age;
@@ -10,7 +9,6 @@ public class Doctor extends Person{
     public String contactNum;
     public String password;
     public PatientQueue patientQueue = new PatientQueue();
-    Department dep;
     public Doctor(String id, String name, String password){
         this.doctorId = id;
         this.name = name;
@@ -18,8 +16,36 @@ public class Doctor extends Person{
     }
 
     public Doctor(){
-
     }
+
+    public Doctor(Doctor doctor){
+        this.name = doctor.name;
+        this.doctorId = doctor.doctorId;
+        this.password = doctor.password;
+        this.cnicNum = doctor.cnicNum;
+        this.patientQueue = new PatientQueue();
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCnicNum() {
+        return cnicNum;
+    }
+
+    public void setCnicNum(String cnicNum) {
+        this.cnicNum = cnicNum;
+    }
+
     Scanner myInput = new Scanner(System.in);
 
     public void checkNextPatient(){
@@ -27,7 +53,7 @@ public class Doctor extends Person{
         //Get patient object from queue
         Patient patient = patientQueue.dequeuePatient();
 
-        patient.addMedicalRecord(this);
+        patient.getMedicalRecordList().addMedicalRecord(this);
     }
 
     public String getName(){
@@ -63,6 +89,7 @@ public class Doctor extends Person{
                 System.out.println("🚫Invalid Input");
         }
     }
+
     @Override
     public String toString() {
         return "Doctor{" +
@@ -73,34 +100,9 @@ public class Doctor extends Person{
                 ", contactNum='" + contactNum + '\'' +
                 ", password='" + password + '\'' +
                 '}';
-=======
-public class Doctor{
-    public String doctorId;
-    public String name;
-    public String cnicNum;
-
-    public String getDoctorId() {
-        return doctorId;
     }
 
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCnicNum() {
-        return cnicNum;
-    }
-
-    public void setCnicNum(String cnicNum) {
-        this.cnicNum = cnicNum;
->>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
+    public PatientQueue getPatientQueue() {
+        return patientQueue;
     }
 }

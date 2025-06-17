@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -8,12 +10,13 @@ public class AdminManager {
     DepartmentManager departmentManager;
     PatientManager patientManager;
 
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
     public AdminManager(Hospital hospital){
         this.patientTree = hospital.patientTree;
         this.doctorList = hospital.doctorList;
         this.departmentManager = hospital.departmentManager;
         this.adminList = new AdminList();
-        this.patientManager = hospital.patientManager;
         addAdmin();
     }
     Scanner myInput = new Scanner(System.in);
@@ -99,7 +102,7 @@ public class AdminManager {
                 case 4:
                     deletePatient();
                     break;
-                case 5:
+                case 0:
                     return;
                 default:
                     System.out.println("Invalid choice");
@@ -112,18 +115,31 @@ public class AdminManager {
     }
 
     public void addPatient(){
-        Patient tempPatient = new Patient();
+        Patient tempPatient = new Patient(departmentManager);
 
         System.out.println("\n\t-------Add Patient------");
+        System.out.println("Enter CNIC #: ");
+        tempPatient.cnicNum = myInput.nextLine();
+
         System.out.println("Enter patient Name:");
         tempPatient.name = myInput.nextLine();
 
-        System.out.println("Enter ID card #: ");
-        tempPatient.cnicNum = myInput.nextLine();
+        tempPatient.patientId = IdGenerator.generatePatientId();
 
         System.out.println("Enter patient's blood type:");
         tempPatient.bloodType = myInput.nextLine();
 
+        System.out.println("Enter password: ");
+        tempPatient.password = myInput.nextLine();
+
+        System.out.println("Enter Address:");
+        tempPatient.location = myInput.nextLine();
+
+        System.out.println("Enter Date of Birth (dd-MM-YYYY)");
+        String date = myInput.nextLine();
+        tempPatient.dateofbirth = LocalDate.parse(date,dateFormatter);
+
+        tempPatient.departmentManager = this.departmentManager;
         patientTree.addPatient(tempPatient);
 
     }
@@ -157,7 +173,7 @@ public class AdminManager {
                 }
             }
         } else {
-            System.out.println("Department Doesn't exist");
+            System.out.println("❌Department Doesn't exist");
         }
     }
 

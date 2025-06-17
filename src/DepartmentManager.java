@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
-=======
-import  java.util.HashMap;
->>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
 import java.util.Scanner;
 public class DepartmentManager {
     HashMap<String, Department> departmentList;
@@ -102,16 +98,19 @@ public class DepartmentManager {
         System.out.print("Enter password: ");
         String password = myInput.nextLine();
 
-        String depName = doctorLogin.get(docId).validateLogin(docId,password);
+        DoctorLogin doctorLoginVariable = doctorLogin.get(docId);
+        if(doctorLoginVariable!=null) {
+            String depName = doctorLoginVariable.validateLogin(docId, password);
 
-        if(depName!= null) {
-            System.out.println("✔ Logged in Successfully");
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-            Department department = departmentList.get(depName);
-            selectDoctor(department,docId);
+            if (depName != null) {
+                System.out.println("✔ Logged in Successfully");
+                Department department = departmentList.get(depName);
+                selectDoctor(department, docId);
+            } else {
+                System.out.println("🚫Invalid credentials");
+            }
         }else {
-            System.out.println("🚫Invalid credentials");
+            System.out.println("❌Invalid Username");
         }
 
     }

@@ -1,4 +1,6 @@
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,19 +10,19 @@ import java.util.Scanner;
 public class Patient {
     public String patientId;
     public  String bloodType;
-    private MedicalRecord medicalRecord;
-    private MedicalRecordList medicalRecordList;
     public String name;
     public String cnicNum;
     public String password;
-    public Date dateofbirth;
+    public LocalDate dateofbirth;
     public String reason;
     public List<String> allergies;
     public String location;
+    private MedicalRecordList medicalRecordList;
+    public DepartmentManager departmentManager;
     Scanner scanner = new Scanner(System.in);
-    public Patient() {
+    public Patient(DepartmentManager departmentManager) {
         this.allergies = new ArrayList<>();
-        this.medicalRecord = new MedicalRecord();
+        this.departmentManager = departmentManager;
     }
 
     public String getPatientId() {
@@ -38,15 +40,6 @@ public class Patient {
     public void setBloodType(String bloodType) {
         this.bloodType = bloodType;
     }
-
-    public MedicalRecord getMedicalRecord() {
-        return medicalRecord;
-    }
-
-    public void setMedicalRecord(MedicalRecord medicalRecord) {
-        this.medicalRecord = new MedicalRecord();
-    }
-
 
     public MedicalRecordList getMedicalRecordList() {
         return medicalRecordList;
@@ -80,11 +73,11 @@ public class Patient {
         this.password = password;
     }
 
-    public Date getDateofbirth() {
+    public LocalDate getDateofbirth() {
         return dateofbirth;
     }
 
-    public void setDateofbirth(Date dateofbirth) {
+    public void setDateofbirth(LocalDate dateofbirth) {
         this.dateofbirth = dateofbirth;
     }
 
@@ -112,28 +105,36 @@ public class Patient {
         this.location = location;
     }
 
-    private void patientDashboard(Patient patient) {
+    public void patientDashboard() {
         while (true) {
             System.out.println("\n\t===== Patient Dashboard =====");
             System.out.println("1. View My Information");
             System.out.println("2. Update My Information");
             System.out.println("3. View Medical Records");
-            System.out.println("4. Logout");
+            System.out.println("4. Last Checkup Record");
+            System.out.println("5. Book New Appointment");
+            System.out.println("0. Logout");
 
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
                 case 1:
-                    patient.viewPatientInfo();
+                   this.viewPatientInfo();
                     break;
                 case 2:
-                    patient.updatePatientInfo();
+                    this.updatePatientInfo();
                     break;
                 case 3:
-                    patient.viewMedicalRecords();
+                    this.viewMedicalRecords();
                     break;
                 case 4:
+                    this.medicalRecordList.viewLastRecord();
+                    break;
+                case 5:
+                    this.bookAppointments();
+                    break;
+                case 0:
                     return;
                 default:
                     System.out.println("Invalid choice");
@@ -153,14 +154,16 @@ public class Patient {
 
     private void updatePatientInfo() {
         System.out.println("\n\t------- Update Information -------");
-        System.out.println("Leave field blank to keep current value");
+        System.out.println("(Leave field blank to keep current value)");
 
         System.out.println("Current name: " + this.name);
         System.out.println("Enter new name:");
         String newName =  scanner.nextLine();
-        if (!newName.isEmpty()) {
-            this.name = newName;
+        if (newName.isEmpty()) {
+            return;
         }
+
+        this.name = newName;
 
         System.out.println("Current blood type: " + this.bloodType);
         System.out.println("Enter new blood type:");
@@ -179,43 +182,35 @@ public class Patient {
         System.out.println("Information updated successfully!");
     }
 
+    public void bookAppointments(){
+        System.out.println("Enter appointment date (DD-MM-YYYY): ");
+        String dateInput = scanner.nextLine();
 
-    private void viewMedicalRecords() {
-        System.out.println("\n\t------- Medical Records -------");
-        System.out.println("Patient: " + this.getName() + " (" + this.getPatientId() + ")");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate appointmentDate = LocalDate.parse(dateInput, formatter);
 
-        MedicalRecord record = this.getMedicalRecord();
+        System.out.println("Enter department name: ");
+        String depName = scanner.nextLine();
 
-        if (record == null) {
-            System.out.println("No medical record available.");
+
+        Department department = departmentManager.departmentList.get(depName);
+
+        if (department == null) {
+            System.out.println("Error: Department '" + depName + "' not found!");
             return;
         }
 
-        System.out.println("\nMedical Record Details:");
-        System.out.println("1. Record ID: " + record.getRecordId());
-        System.out.println("2. Initial Diagnosis: " + record.getInitialDiagnosis());
-        System.out.println("3. Current Diagnosis: " + record.getDiagnosis());
-        System.out.println("4. Severity: " + record.getSeverity());
-        System.out.print("5. Admit Status: ");
-        if (record.isAdmitStatus()) {
-            System.out.println("Admitted");
-        } else {
-            System.out.println("Not Admitted");
+        if (department.doctorManager == null) {
+            System.out.println("Error: No doctor manager available for this department");
+            return;
         }
 
-        if (record.getDoctor() != null) {
-            System.out.println("6. Attending Doctor: " + record.getDoctor().getName());
-        }
+        department.doctorManager.manageAppointment(appointmentDate, this);
 
-        System.out.print("7. Bed Number: ");
-        if (record.getBedNumber() != null) {
-            System.out.println(record.getBedNumber());
-        } else {
-            System.out.println("N/A");
-        }
-        System.out.println("8. Medications: " + record.getMedications());
-        System.out.println("9. Last Check-up: " + record.getCheckUpDate());
-        System.out.println("----------------------------------");
+    }
+
+    private void viewMedicalRecords() {
+        medicalRecordList.displayAllRecords();
     }
 
 

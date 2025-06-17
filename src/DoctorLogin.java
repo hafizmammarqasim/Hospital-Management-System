@@ -34,7 +34,6 @@ public class DoctorLogin {
     }
 
     public String validateLogin(String id, String pass){
-        System.out.println(doctorId+" "+" Pass: "+password+" "+" Department: "+department);
         if( this.doctorId.equals(id) && this.password.equals(pass))
             return department;
         else return null;

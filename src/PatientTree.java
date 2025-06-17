@@ -104,11 +104,7 @@ public class PatientTree {
 
         if (node != null) {
             // now Get the record ID from patient's medical record
-            String recordId = node.pData.getMedicalRecord().getRecordId();
-
             //  Remove from MedicalRecordList
-            recordList.removeMedicalRecordByRecordId(recordId);
-
             //  Delete patient from tree
             root = deletePatient(root, cnicNum);
             System.out.println("Patient and medical record deleted");
@@ -215,7 +211,6 @@ public class PatientTree {
             System.out.println(patient.pData.toString());
             return patient;
         }else {
-            System.out.println("No such patient exist");
             return null;
         }
 
@@ -225,7 +220,6 @@ public class PatientTree {
 
     private PatientTreeNode searchPatient(PatientTreeNode patient, String cnicNum){
         if(patient == null){
-            System.out.println("No Patient in the data base");
             return null;
         }
 
