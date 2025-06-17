@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import  java.util.HashMap;
 import java.util.Scanner;
 public class DepartmentManager {
     // dkh lou department kay functions kam hain, ham is class k baghair

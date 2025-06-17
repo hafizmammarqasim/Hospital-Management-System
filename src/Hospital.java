@@ -5,6 +5,7 @@ public class Hospital {
     HashMap<String, Department> departmentList;
     AdminManager adminManager;
     DoctorManager doctorManager;
+    PatientManager patientManager;
     PatientTree patientTree;
     HashMap<String, Doctor> doctorList;
     private static final Hospital INSTANCE = new  Hospital();
