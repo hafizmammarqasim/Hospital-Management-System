@@ -2,7 +2,7 @@ import java.math.BigInteger;
 
 public class PatientTree {
     PatientTreeNode root;
-
+    private MedicalRecordList medicalRecordList;
 
     //===================================================
     //               Add Patient Functions
@@ -97,7 +97,25 @@ public class PatientTree {
 
         return node;
     }
+// this function will delete patient from patient tree and also his medical record from linked list
+    public void deletePatient(String cnicNum, MedicalRecordList recordList) {
+        // 1. First find the patient node
+        PatientTreeNode node = searchPatient(root, cnicNum);
 
+        if (node != null) {
+            // now Get the record ID from patient's medical record
+            String recordId = node.pData.getMedicalRecord().getRecordId();
+
+            //  Remove from MedicalRecordList
+            recordList.removeMedicalRecordByRecordId(recordId);
+
+            //  Delete patient from tree
+            root = deletePatient(root, cnicNum);
+            System.out.println("Patient and medical record deleted");
+        } else {
+            System.out.println("Patient not found");
+        }
+    }
     //deletePatientLogic
     private PatientTreeNode delete(PatientTreeNode node){
         //if patient Node has no child node
@@ -189,29 +207,34 @@ public class PatientTree {
 
     //===========================================
 
-    public void searchPatient(String idCardNum){
+    public PatientTreeNode searchPatient(String cnicNum){
         PatientTreeNode patient;
-        patient = searchPatient(root, idCardNum);
+        patient = searchPatient(root, cnicNum);
 
         if (patient!= null){
             System.out.println(patient.pData.toString());
+            return patient;
         }else {
             System.out.println("No such patient exist");
+            return null;
         }
+
     }
 
-    private PatientTreeNode searchPatient(PatientTreeNode patient, String idCardNum){
+
+
+    private PatientTreeNode searchPatient(PatientTreeNode patient, String cnicNum){
         if(patient == null){
             System.out.println("No Patient in the data base");
             return null;
         }
 
-        int result = idCardNum.compareTo(patient.pData.cnicNum);
+        int result = cnicNum.compareTo(patient.pData.cnicNum);
 
         if(result<0){
-            return searchPatient(patient.left,idCardNum);
+            return searchPatient(patient.left,cnicNum);
         } else if(result>0){
-            return searchPatient(patient.right, idCardNum);
+            return searchPatient(patient.right, cnicNum);
         }else{
             return patient;
         }

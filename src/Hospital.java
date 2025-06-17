@@ -4,7 +4,12 @@ public class Hospital {
 //    private String hName;
     HashMap<String, Department> departmentList;
     AdminManager adminManager;
+<<<<<<< HEAD
     DepartmentManager departmentManager;
+=======
+    DoctorManager doctorManager;
+    PatientManager patientManager;
+>>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
     PatientTree patientTree;
     HashMap<String, Doctor> doctorList;
 

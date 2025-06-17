@@ -6,12 +6,14 @@ public class AdminManager {
     PatientTree patientTree;
     HashMap<String, Doctor> doctorList;
     DepartmentManager departmentManager;
+    PatientManager patientManager;
 
     public AdminManager(Hospital hospital){
         this.patientTree = hospital.patientTree;
         this.doctorList = hospital.doctorList;
         this.departmentManager = hospital.departmentManager;
         this.adminList = new AdminList();
+        this.patientManager = hospital.patientManager;
         addAdmin();
     }
     Scanner myInput = new Scanner(System.in);
@@ -73,35 +75,38 @@ public class AdminManager {
 
     }
 
-    public void patientFunctions(){
-        while (true){
-        System.out.println("\t===== Patient Functions =====");
-        System.out.println("1. Add Patients");
-        System.out.println("2. Search Patient");
-        System.out.println("3. View Patients");
-        System.out.println("4. Delete Patient");
-        System.out.println("0. Back");
+    public void patientFunctions() {
+        while (true) {
+            System.out.println("\t===== Patient Functions =====");
+            System.out.println("1. Add Patients");
+            System.out.println("2. Search Patient");
+            System.out.println("3. View Patients");
+            System.out.println("4. Delete Patient");
+            System.out.println("0. Back");
 
-        int choice = myInput.nextInt();
-        myInput.nextLine();
-        switch (choice) {
-            case 1:
-                addPatient();
-                break;
-            case 2:
-                searchPatient();
-                break;
-            case 3:
-                viewPatients();
-                break;
-            case 4:
-                deletePatient();
-                break;
-            case 5:
-                return;
-            default:
-                System.out.println("Invalid choice");
-        }
+            int choice = myInput.nextInt();
+            myInput.nextLine();
+            switch (choice) {
+                case 1:
+                    addPatient();
+                    break;
+                case 2:
+                    searchPatient();
+                    break;
+                case 3:
+                    viewPatients();
+                    break;
+                case 4:
+                    deletePatient();
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.out.println("Invalid choice");
+            }
+
+            patientManager.patientFunctionsMenu();
+
 
         }
     }

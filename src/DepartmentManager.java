@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+=======
+import  java.util.HashMap;
+>>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
 import java.util.Scanner;
 public class DepartmentManager {
     HashMap<String, Department> departmentList;

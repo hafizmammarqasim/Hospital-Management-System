@@ -1,4 +1,5 @@
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalRecord {
@@ -34,6 +35,10 @@ public class MedicalRecord {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
     }
 
     public void setBedNumber(String bedNumber) {
@@ -41,7 +46,11 @@ public class MedicalRecord {
     }
 
     public void setMedications(List<String> medications) {
+<<<<<<< HEAD
         this.medications = medications;
+=======
+        this.medications = new ArrayList<>(medications);
+>>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
     }
 
     public void setCheckUpDate(DateTimeFormatter checkUpDate) {
@@ -95,4 +104,8 @@ public class MedicalRecord {
 
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde

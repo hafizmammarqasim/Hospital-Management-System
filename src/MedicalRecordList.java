@@ -14,10 +14,21 @@ public class MedicalRecordList {
         size = 0;
     }
 
+<<<<<<< HEAD
     // Add a medical record with MedicalRecord object
     public void addMedicalRecord(MedicalRecord record) {
         MedicalRecordNode newNode = new MedicalRecordNode(record);
 
+=======
+    public MedicalRecordNode getTail() {
+        return tail;
+    }
+
+    // Add a medical record with MedicalRecord object
+    public void addMedicalRecord(MedicalRecord record) {
+        MedicalRecordNode newNode = new MedicalRecordNode(record);
+
+>>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
         if (head == null) {
             head = newNode;
             tail = newNode;
@@ -56,7 +67,11 @@ public class MedicalRecordList {
         newRecord.setBedNumber(scanner.nextLine());
 
 
+<<<<<<< HEAD
         System.out.println("Enter medications [only-one per line, blank line to finish:");
+=======
+        System.out.println("Enter medications [onlk-one per line, blank line to finish:");
+>>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
         List<String> medications = new ArrayList<>();
         while (true) {
             String med = scanner.nextLine();
@@ -95,7 +110,12 @@ public class MedicalRecordList {
             System.out.println("Record ID: " + record.getRecordId());
             System.out.println("Diagnosis: " + record.getDiagnosis());
             System.out.println("Severity: " + record.getSeverity());
+<<<<<<< HEAD
             System.out.println("Admit Status: " + record.isAdmitStatus());  System.out.print("Attending Doctor: ");
+=======
+            System.out.println("Admit Status: " + record.isAdmitStatus());
+            System.out.print("Attending Doctor: ");
+>>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
             if (record.getDoctor() != null) {
                 System.out.println(record.getDoctor().getName());
             } else {
@@ -109,6 +129,10 @@ public class MedicalRecordList {
 
     public boolean removeMedicalRecordByRecordId(String recordId) {
         if (head == null) return false;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
         // Case 1: Remove head node
         if (head.data.getRecordId().equals(recordId)) {
             head = head.next;
@@ -182,6 +206,7 @@ public class MedicalRecordList {
             counter++;
         }
     }
+<<<<<<< HEAD
 
     public void viewLastRecord() {
             if (isEmpty()) {
@@ -192,3 +217,6 @@ public class MedicalRecordList {
 
         }
 }
+=======
+}
+>>>>>>> 23b485f0238dd5c535b3b5036066c3b125b46fde
