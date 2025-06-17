@@ -3,6 +3,11 @@ import java.util.Scanner;
 
 public class Doctor extends Person{
     public String doctorId;
+    public String name;
+    public String age;
+    public String cnicNum;
+    public String contactNum;
+    public String password;
     public PatientQueue patientQueue = new PatientQueue();
     Department dep;
     public Doctor(String id, String name, String password){
@@ -65,7 +70,6 @@ public class Doctor extends Person{
                 ", age='" + age + '\'' +
                 ", cnicNum='" + cnicNum + '\'' +
                 ", contactNum='" + contactNum + '\'' +
-                ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

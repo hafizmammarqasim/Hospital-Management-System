@@ -5,7 +5,6 @@ import java.util.spi.AbstractResourceBundleProvider;
 
 public class Main {
     public static void main(String[] args) {
-
         Scanner myInput = new Scanner(System.in);
         Hospital hospital = new Hospital();
 
@@ -22,6 +21,7 @@ while (true) {
     System.out.println("[4] Emergency");
     System.out.println("[0] Exit");
     System.out.println();
+
 
     System.out.print("Enter your choice: ");
     String choice = myInput.nextLine();

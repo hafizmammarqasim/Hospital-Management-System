@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 public class DepartmentManager {
-     Scanner myInput = new Scanner(System.in);
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     HashMap<String, Department> departmentList;
     HashMap<String, DoctorLogin> doctorLogin;
 
+
+    Scanner myInput = new Scanner(System.in);
     //Constructor
     public DepartmentManager(Hospital hospital){
         this.departmentList = hospital.departmentList;
@@ -17,6 +17,29 @@ public class DepartmentManager {
         addDoc("Zadif", "pass1");
         addDoc("Ammar","pass2");
         addDoc("Fareed","pass3");
+    }
+
+    //Ask for date and get doctor from the list of desired date
+    public void selectDoctor(Department department, String docId){
+        System.out.println("Enter today's date: ");
+        String dateString = myInput.nextLine();
+
+        //Object required to format date
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        //Input 1 = Date in our format  Input2 = we are telling in which format date is being added
+        LocalDate date = LocalDate.parse(dateString,formatter);
+
+        //Now access the doctor object
+        HashMap<String, Doctor> tempDocList = department.doctorManager.doctorsList.get(date);
+        //Call doctor's functions which will be shown on login
+        if(tempDocList!=null) {
+            Doctor doctor = tempDocList.get(docId);
+            doctor.performFunctions();
+        } else{
+            System.out.println("❌ No Appointments as of now");
+            System.out.print("\033[H\033[2J");
+        }
     }
 
     public void addDepartments(){
@@ -49,7 +72,7 @@ public class DepartmentManager {
     }
 
     public void deleteDoctor(String depName){
-        System.out.println("==== Delete Doctor ====");
+        System.out.println("====== ❗ Delete Doctor ======");
 
         System.out.println("Enter the doctor Id");
         String id = myInput.nextLine();
@@ -89,23 +112,7 @@ public class DepartmentManager {
 
     }
 
-    //Ask for date and get doctor from the list of desired date
-    public void selectDoctor(Department department, String docId){
-        System.out.println("Enter today's date: ");
-        String dateString = myInput.nextLine();
 
-        LocalDate date = LocalDate.parse(dateString,formatter);
-        //Now access the doctor object
-        HashMap<String, Doctor> tempDocList = department.doctorManager.doctorsList.get(date);
-        //Call doctor's functions which will be shown on login
-        if(tempDocList!=null) {
-            Doctor doctor = tempDocList.get(docId);
-            doctor.performFunctions();
-        } else{
-            System.out.println("❌ No Appointments as of now");
-            System.out.print("\033[H\033[2J");
-        }
-    }
 
     public void addDoc(String name, String pass){
         String id1 = IdGenerator.generateDoctorId();

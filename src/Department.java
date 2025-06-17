@@ -5,15 +5,17 @@ import java.util.*;
 public class Department {
     protected String name;
     protected String depId;
-    protected HashMap<String, Doctor> doctorList;
     ArrayList<Bed> emptyBeds = new ArrayList<>();
-    DoctorManager doctorManager = new DoctorManager(this);
+    protected HashMap<String, Doctor> doctorList;
     ArrayList<Bed> occupiedBeds = new ArrayList<>();
+    DoctorManager doctorManager;
 
     public Department(String name, String depId){
         this.name = name;
         this.depId = depId;
         this.doctorList = new HashMap<>();
+        //Pass list of doctors to add in the other list which is managed by date
+        this.doctorManager = new DoctorManager(this.doctorList);
         addBeds();
     }
 
@@ -29,6 +31,10 @@ public class Department {
 
     public HashMap<String, Doctor> getDoctorList() {
         return doctorList;
+    }
+
+    public void assignBed(){
+        this.occupiedBeds.add(emptyBeds.getFirst());
     }
 
 //    public HashMap<String, DoctorLogin> getDoctorLoginList() {

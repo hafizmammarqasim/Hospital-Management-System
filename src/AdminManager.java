@@ -4,14 +4,12 @@ import java.util.Scanner;
 public class AdminManager {
     AdminList adminList;
     PatientTree patientTree;
-    DoctorManager doctorManager;
     HashMap<String, Doctor> doctorList;
     DepartmentManager departmentManager;
 
     public AdminManager(Hospital hospital){
         this.patientTree = hospital.patientTree;
         this.doctorList = hospital.doctorList;
-        this.doctorManager = hospital.doctorManager;
         this.departmentManager = hospital.departmentManager;
         this.adminList = new AdminList();
         addAdmin();
@@ -50,10 +48,10 @@ public class AdminManager {
         System.out.println("\t   *** Admin ka menu ***  ");
         System.out.println("\t==============================");
 
-        System.out.println("1. Register Doctor");
-        System.out.println("2. Patient Functions");
-        System.out.println("3. Have Checkup");
-        System.out.println("4. Exit ");
+        System.out.println("[1] Register Doctor");
+        System.out.println("[2] Patient Functions");
+        System.out.println("[3] Have Checkup");
+        System.out.println("[0] Exit ");
 
         int choice = myInput.nextInt();
         myInput.nextLine();
@@ -67,7 +65,7 @@ public class AdminManager {
                 case 3:
                     haveCheckup();
                     break;
-                case 4:
+                case 0:
                     return;
             }
         }

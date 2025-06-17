@@ -3,12 +3,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 public class DoctorManager {
-    Map<LocalDate, HashMap<String,Doctor>> doctorsList;
+    Map<LocalDate, HashMap<String,Doctor>> doctorsList;  //Contains Doctors List Based on Dates
     HashMap<String, Doctor> depDoctors;
     Scanner myInput = new Scanner(System.in);
 
-    public DoctorManager (Department department){
-        this.depDoctors = department.doctorList;
+    public DoctorManager (HashMap<String, Doctor> depDoctors){
+        this.depDoctors = depDoctors;
         this.doctorsList = new HashMap<>();
     }
 

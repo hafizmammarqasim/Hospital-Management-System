@@ -1,4 +1,10 @@
-public class Patient extends Person {
+public class Patient {
+    public String name;
+    public String age;
+    public String cnicNum;
+    public String contactNum;
+    public String userName;
+    public String password;
     public String patientId;
     String bloodType;
     private MedicalRecordList medicalRecord;
