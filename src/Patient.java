@@ -23,6 +23,7 @@ public class Patient {
     public Patient(DepartmentManager departmentManager) {
         this.allergies = new ArrayList<>();
         this.departmentManager = departmentManager;
+        this.medicalRecordList = new MedicalRecordList();
     }
 
     public String getPatientId() {

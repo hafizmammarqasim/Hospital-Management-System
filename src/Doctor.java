@@ -66,27 +66,29 @@ public class Doctor{
     }
 
     public void performFunctions(){
-        System.out.println("========================================");
-        System.out.println("       "+this.name+"'s Profile ");
-        System.out.println("========================================");
-        System.out.println();
-        System.out.println("Please select an option: ");
-        System.out.println("[1] View Today's Patients");
-        System.out.println("[2] Check Next Patient");
-        System.out.println("[0] Back");
-        String choice = myInput.nextLine();
+        while (true) {
+            System.out.println("========================================");
+            System.out.println("       " + this.name + "'s Profile ");
+            System.out.println("========================================");
+            System.out.println();
+            System.out.println("Please select an option: ");
+            System.out.println("[1] View Today's Patients");
+            System.out.println("[2] Check Next Patient");
+            System.out.println("[0] Back");
+            String choice = myInput.nextLine();
 
-        switch (choice){
-            case "1":
-                viewTodayPatients();
-                break;
-            case "2":
-                checkNextPatient();
-                break;
-            case "0":
-                return;
-            default:
-                System.out.println("🚫Invalid Input");
+            switch (choice) {
+                case "1":
+                    viewTodayPatients();
+                    break;
+                case "2":
+                    checkNextPatient();
+                    break;
+                case "0":
+                    return;
+                default:
+                    System.out.println("🚫Invalid Input");
+            }
         }
     }
 

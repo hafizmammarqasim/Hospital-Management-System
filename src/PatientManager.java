@@ -51,7 +51,7 @@ public class PatientManager {
         Patient patient = patientTree.searchPatient(cnic).pData;
 
         if (patient != null && patient.getPassword().equals(password)) {
-            System.out.println("Login successful! Welcome, " + patient.name);
+            System.out.println("✅Login successful! Welcome, " + patient.name);
            patient.patientDashboard();
         } else {
             System.out.println("Invalid CNIC or password. Please try again.");
@@ -209,7 +209,7 @@ public class PatientManager {
     }
 
     public Patient getDate(Patient patient){
-        System.out.println("Enter your date of birth (YYYY-MM-DD):");
+        System.out.println("Enter your date of birth (DD-MM-YYYY):");
         String date = myInput.nextLine();
 
         try {

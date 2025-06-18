@@ -14,7 +14,6 @@ public class PatientQueue {
             size++; //This size variable would be used to check how much patients are there in the queue,
                     //so we can check which doctor has less patients
 
-        System.out.println("Your appointment is booked at Doctor :"+ patient.name);
     }
 
     public Patient dequeuePatient(){

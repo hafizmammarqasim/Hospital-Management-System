@@ -72,7 +72,7 @@ public class MedicalRecordList {
         }
         newRecord.setMedications(medications);
 
-        newRecord.setCheckUpDate(DateTimeFormatter.ISO_LOCAL_DATE);
+//        newRecord.setCheckUpDate(DateTimeFormatter.ISO_LOCAL_DATE);
 
         this.addMedicalRecord(newRecord);
         System.out.println("Medical record added successfully!");
