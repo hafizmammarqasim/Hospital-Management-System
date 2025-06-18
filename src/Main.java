@@ -35,7 +35,9 @@ while (true) {
             break;
         case "3":
             hospital.patientManager.patientPortal();
+            break;
         case "4":
+            hospital.e.enterDetails();
             break;
         case "0":
             return;

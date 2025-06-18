@@ -6,6 +6,7 @@ public class Department {
     protected String name;
     protected String depId;
     ArrayList<Bed> emptyBeds = new ArrayList<>();
+    protected ArrayList<Bed> bedList = new ArrayList<>();
     protected HashMap<String, Doctor> doctorList;
     ArrayList<Bed> occupiedBeds = new ArrayList<>();
     DoctorManager doctorManager;
@@ -26,6 +27,21 @@ public class Department {
         for (int i=1; i<=10; i++) {
             Bed tempBed = new Bed(i);
             emptyBeds.add(tempBed);
+        }
+    }
+
+    public Bed getAvailableBed() {
+        for (Bed bed : bedList) {
+            if (bed.isAvailable()) {
+                return bed;
+            }
+        }
+        return null;
+    }
+
+    public void showAllBeds() {
+        for (Bed bed : bedList) {
+            System.out.println(bed.getBedId() + " - " + bed.getStatus());
         }
     }
 

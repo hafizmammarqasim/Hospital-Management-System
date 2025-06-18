@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ public class AdminManager {
     HashMap<String, Doctor> doctorList;
     DepartmentManager departmentManager;
     PatientManager patientManager;
+    Hospital hospital;
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -16,6 +18,7 @@ public class AdminManager {
         this.patientTree = hospital.patientTree;
         this.doctorList = hospital.doctorList;
         this.departmentManager = hospital.departmentManager;
+        this.hospital = hospital;
         this.adminList = new AdminList();
         addAdmin();
     }
@@ -56,7 +59,10 @@ public class AdminManager {
         System.out.println("[1] Register Doctor");
         System.out.println("[2] Patient Functions");
         System.out.println("[3] Have Checkup");
-        System.out.println("[0] Exit ");
+            System.out.println("[4]. Ambulance Details");
+            System.out.println("[5]. Bed Details");
+            System.out.println("0. ↩ Back");
+
 
         int choice = myInput.nextInt();
         myInput.nextLine();
@@ -69,6 +75,12 @@ public class AdminManager {
                     break;
                 case 3:
                     haveCheckup();
+                    break;
+                case 4:
+                    ambulanceDetailsMenu();
+                    break;
+                case 5:
+                    bedDetailsMenu();
                     break;
                 case 0:
                     return;
@@ -85,7 +97,7 @@ public class AdminManager {
             System.out.println("2. Search Patient");
             System.out.println("3. View Patients");
             System.out.println("4. Delete Patient");
-            System.out.println("0. Back");
+            System.out.println("0. ↩ Back");
 
             int choice = myInput.nextInt();
             myInput.nextLine();
@@ -168,6 +180,7 @@ public class AdminManager {
                     case '3':
                         departmentManager.viewDepartmentDoctors(depName);
                         break;
+
                     case '0':
                         return;
                 }
@@ -229,5 +242,92 @@ public class AdminManager {
         patientTree.deletePatients(idCardNum);
     }
 
+    public void ambulanceDetailsMenu() {
+        while (true) {
+            System.out.println("\n--- Ambulance Details ---");
+            System.out.println("1. View Available Ambulances");
+            System.out.println("2. View Unavailable Ambulances");
+            System.out.println("0. Back to Admin Menu");
+
+            int choice = myInput.nextInt();
+            myInput.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("✅ Available Ambulances:");
+                    hospital.availableAmbulances.viewAmbulances();
+                    break;
+                case 2:
+                    System.out.println("🚫 Unavailable Ambulances:");
+                    hospital.unavailableAmbulances.viewAmbulances();
+                    break;
+
+                case 0:
+                    return;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        }
+    }
+    public void moveUnavailableAmbulances() {
+        if (hospital.unavailableAmbulances.isEmpty()) {
+            System.out.println("❌ No unavailable ambulances to move.");
+            return;
+        }
+
+        AmbulanceList unavailableAmbulances= hospital.unavailableAmbulances;
+        Ambulance ambulance = unavailableAmbulances.dispatchAmbulance();
+        while (ambulance!= null) {
+            hospital.availableAmbulances.addAmbulance(ambulance);
+            ambulance = unavailableAmbulances.dispatchAmbulance();
+        }
+    }
+
+    public void bedDetailsMenu() {
+        while (true) {
+            System.out.println("\n--- Bed Details ---");
+            System.out.println("1. View All Beds");
+            System.out.println("2. View Occupied Beds");
+            System.out.println("3. View Available Beds");
+            System.out.println("4. Back to Admin Menu");
+
+            int choice = myInput.nextInt();
+            myInput.nextLine();
+
+            ArrayList<Bed> beds = hospital.bedList; // assumes public bedList in hospital
+
+            switch (choice) {
+                case 1:
+                    for (Bed bed : beds) {
+                        System.out.println(bed.getBedId() + " - " + bed.getStatus());
+                    }
+                    break;
+                case 2:
+                    for (Bed bed : beds) {
+                        if (!bed.isAvailable()) {
+                            System.out.println(bed.getBedId() + " - " + bed.getStatus() + " (" + bed.getPatient().name + ")");
+                        }
+                    }
+                    break;
+                case 3:
+                    for (Bed bed : beds) {
+                        if (bed.isAvailable()) {
+                            System.out.println(bed.getBedId() + " - AVAILABLE");
+                        }
+                    }
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        }
+    }
+
 
 }
+
+
+
+
+

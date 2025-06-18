@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+
 public class Patient {
     public String patientId;
     public  String bloodType;
@@ -19,6 +20,7 @@ public class Patient {
     public String location;
     private MedicalRecordList medicalRecordList;
     public DepartmentManager departmentManager;
+    private int locationIndex;
     Scanner scanner = new Scanner(System.in);
     public Patient(DepartmentManager departmentManager) {
         this.allergies = new ArrayList<>();
@@ -212,6 +214,13 @@ public class Patient {
 
     private void viewMedicalRecords() {
         medicalRecordList.displayAllRecords();
+    }
+
+    public void setLocation(int index) {
+        this.locationIndex = index;
+    } public void addEmergencyMedicalRecord(String reason) {
+        MedicalRecord emergencyRecord = new MedicalRecord(reason);
+        medicalRecordList.addMedicalRecord(emergencyRecord);
     }
 
 
